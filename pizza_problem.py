@@ -1,5 +1,5 @@
 #=============================
-#Pizza Problem Using OOPS
+#Pizza Order System Using OOPS
 #=============================
 class pizza:
     def __init__(self,name,price):
