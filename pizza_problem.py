@@ -1,26 +1,6 @@
-class cart:
-  def __init__(self,count,name,price):
-    self.count=count
-    self.name=name
-    self.price=price
-class discount:
-  def __init__(self,pizza,toppings,drink,discountrate):
-    self.pizza=pizza
-    self.toppings=toppings
-    self.drink=drink
-    self.discountrate=discountrate
-dis=discount('regular pizza','corn','pepsi',0.05)
-
-def discounts():
-  for i in range(0,len(c)):
-    if dis.pizza in c[i].name:
-      for i in range(0,len(c)):
-        if dis.toppings in c[i].name:
-          for i in range(0,len(c)):
-            if dis.drink in c[i].name:
-              return dis.discountrate
-    else:
-      return 0
+#=============================
+#Pizza Problem Using OOPS
+#=============================
 class pizza:
     def __init__(self,name,price):
         self.name=name
@@ -74,6 +54,29 @@ class calculation:
                   total=total+(c[i].count*c[i].price)
                 print("The final amount to pay:",total-(discounts()*total))
                 print("************+++++++*************")
+class cart:
+  def __init__(self,count,name,price):
+    self.count=count
+    self.name=name
+    self.price=price
+class discount:
+  def __init__(self,pizza,toppings,drink,discountrate):
+    self.pizza=pizza
+    self.toppings=toppings
+    self.drink=drink
+    self.discountrate=discountrate
+dis=discount('regular pizza','corn','pepsi',0.05)
+
+def discounts():
+  for i in c:
+    if dis.pizza == i.name:
+      for i in c:
+        if dis.toppings == i.name:
+          for i in c:
+            if dis.drink == i.name:
+              return dis.discountrate
+    else:
+      return 0
 
 def isDrinkOptionSelected(selectedDrinkOption):
     return selectedDrinkOption == 1
