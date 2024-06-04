@@ -1,102 +1,110 @@
 #=============================
 #Pizza Order System Using OOPS
 #=============================
-class pizza:
-    def __init__(self,name,price):
-        self.name=name
-        self.price=price
-c=[]
-p=[pizza("regular pizza",50),pizza("whole wheat pizza",75)]
-while True:
-  print("------------------Available pizza----------------")
-  for i in range(0,len(p)):
-    print(p[i].name,":",p[i].price)
-  print("Enter 'next' to show other option.")
-  pchoice=input("Enter the pizza:")
-  if pchoice == 'next':
-    break;
-  count=int(input("Enter the count:"))
-  for i in range(0,len(p)):
-    if pchoice==p[i].name:
-      c.append(cart(count,p[i].name,p[i].price))
-
-class toppings:
+class Pizza:
     def __init__(self,name,price):
         self.name=name
         self.price=price
 
-t=[toppings("mozzarella cheese",30),toppings("cheddar",35),toppings("spanish",20),toppings("corn",15),toppings("mushroom",15)]
-while True:
-  print("--------------Available Toppings-----------------")
-  for i in range(0,len(t)):
-    print(t[i].name,":",t[i].price)
-  print("Enter next to show other option.")
-  tchoice=input("Enter the toppings:")
-  if tchoice=='next':
-    break;
-  count=int(input("Enter the count:"))
-  for i in range(0,len(t)):
-    if tchoice==t[i].name:
-      c.append(cart(count,t[i].name,t[i].price))
+pizza=[Pizza("regular pizza",50),Pizza("whole wheat pizza",75)]
 
-
-class drink:
+class Toppings:
     def __init__(self,name,price):
         self.name=name
         self.price=price
-class calculation:
-        def calculation(self):
-                print("**************BILL***************")
-                print("You have selected:")
-                total=0
-                for i in range(0,len(c)):
-                  print("Item = ",c[i].name,"|| Price =",c[i].price,"|| Count = ",c[i].count,"|| Total = ",c[i].count*c[i].price)
-                  total=total+(c[i].count*c[i].price)
-                print("The final amount to pay:",total-(discounts()*total))
-                print("************+++++++*************")
-class cart:
+
+toppings=[Toppings("mozzarella cheese",30),Toppings("cheddar",35),Toppings("spanish",20),Toppings("corn",15),Toppings("mushroom",15)]
+
+class Drink:
+    def __init__(self,name,price):
+        self.name=name
+        self.price=price
+
+class Cart:
   def __init__(self,count,name,price):
     self.count=count
     self.name=name
     self.price=price
-class discount:
-  def __init__(self,pizza,toppings,drink,discountrate):
-    self.pizza=pizza
-    self.toppings=toppings
-    self.drink=drink
-    self.discountrate=discountrate
-dis=discount('regular pizza','corn','pepsi',0.05)
 
-def discounts():
-  for i in c:
-    if dis.pizza == i.name:
-      for i in c:
-        if dis.toppings == i.name:
-          for i in c:
-            if dis.drink == i.name:
-              return dis.discountrate
-    else:
-      return 0
+cart=[]
+
+class Discount:
+  def __init__(self,Pizza,Toppings,Drink,discount_rate):
+    self.Pizza=Pizza
+    self.Toppings=Toppings
+    self.Drink=Drink
+    self.discount_rate=discount_rate
+  @classmethod
+  def discount_calculation(self):
+     for k in discount:
+        if k.Pizza in [i.name for i in cart if True]:
+           if k.Toppings in [i.name for i in cart if True]:
+              if k.Drink in [i.name for i in cart if True]:
+                 return k.discount_rate
+     return 0
+           
+
+discount=[Discount('regular pizza','corn','pepsi',0.05),Discount('whole wheat pizza','spanish','coke',0.10)]
+
+
+while True:
+  print("------------------Available Pizza----------------")
+  for i in range(0,len(pizza)):
+    print(pizza[i].name,":",pizza[i].price)
+  print("Enter 'next' to show other option.")
+  pchoice=input("Enter the Pizza:")
+  if pchoice == 'next':
+    break;
+  count=int(input("Enter the count:"))
+  for i in range(0,len(pizza)):
+    if pchoice==pizza[i].name:
+      cart.append(Cart(count,pizza[i].name,pizza[i].price))
+
+while True:
+  print("--------------Available Toppings-----------------")
+  for i in range(0,len(toppings)):
+    print(toppings[i].name,":",toppings[i].price)
+  print("Enter next to show other option.")
+  tchoice=input("Enter the Toppings:")
+  if tchoice=='next':
+    break;
+  count=int(input("Enter the count:"))
+  for i in range(0,len(toppings)):
+    if tchoice==toppings[i].name:
+      cart.append(Cart(count,toppings[i].name,toppings[i].price))
+
+drinkoption=int(input("If you need Drink press 1  (OR)\nIf you dont need press 2: "))
 
 def isDrinkOptionSelected(selectedDrinkOption):
     return selectedDrinkOption == 1
-drinkoption=int(input("If you need drink press 1  (OR)\nIf you dont need press 2: "))
+
 if(isDrinkOptionSelected(drinkoption)):
-    d=[drink("pepsi",15),drink("7-up",20),drink("coke",25)]
+    drink=[Drink("pepsi",15),Drink("7-up",20),Drink("coke",25)]
     while True:
       print("----------------Available Drinks----------------")
-      for i in range(0,len(d)):
-        print(d[i].name,":",d[i].price)
+      for i in range(0,len(drink)):
+        print(drink[i].name,":",drink[i].price)
       print("Enter next to show other option.")
-      dchoice=input("Enter the drink:")
+      dchoice=input("Enter the Drink:")
       if dchoice=='next':
         break;
       count=int(input("Enter the count:"))
-      for i in range(0,len(d)):
-        if dchoice==d[i].name:
-          c.append(cart(count,d[i].name,d[i].price))
+      for i in range(0,len(drink)):
+        if dchoice==drink[i].name:
+          cart.append(Cart(count,drink[i].name,drink[i].price))
 
-cal=calculation()
-cal.calculation()
+class Calculation:
+        @classmethod
+        def calculation(self):
+                print("**************BILL***************")
+                print("You have selected:")
+                total=0
+                for i in range(0,len(cart)):
+                  print("Item = ",cart[i].name,"|| Price =",cart[i].price,"|| Count = ",cart[i].count,"|| Total = ",cart[i].count*cart[i].price)
+                  total=total+(cart[i].count*cart[i].price)
+                print("The final amount to pay:",total-(Discount.discount_calculation()*total))
+                print("************+++++++*************")
+
+Calculation.calculation()
 
 
